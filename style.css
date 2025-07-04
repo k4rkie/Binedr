@@ -1,0 +1,106 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Clash Display";
+  height: 100vh;
+  text-align: center;
+}
+h1 {
+  margin: 1rem;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.movie-list {
+  display: flex;
+  justify-content: flex-start;
+  height: 800px;
+  width: 80%;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  border: 1px solid hsla(0, 0%, 0%, 0.473);
+  box-shadow: 0px 0px 5px hsla(0, 0%, 0%, 0.5);
+}
+button {
+  padding: 0.3rem 0.8rem;
+  font-family: inherit;
+}
+input {
+  font-family: inherit;
+  padding: 0.3rem 0.8rem;
+}
+select {
+  font-family: inherit;
+  padding: 0.3rem 0.8rem;
+}
+.popup-add-movie {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: hsla(0, 0%, 0%, 0.2);
+  backdrop-filter: blur(5px);
+}
+.popup-add-movie.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-wrapper {
+  padding: 2rem;
+  height: auto;
+  width: 400px;
+  position: relative;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  box-shadow: 0px 0px 5px hsla(0, 0%, 0%, 0.5);
+  border-radius: 10px;
+}
+.popup-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.wat-fav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 2rem;
+  text-align: left;
+  height: 250px;
+  width: 200px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0px 0px 5px hsla(0, 0%, 0%, 0.5);
+}
+.movie-card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+  transition: 0.3s ease;
+}

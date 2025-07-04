@@ -5,8 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Binedr</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&display=swap"
+      rel="stylesheet" />
+    <!-- <link rel="favicon" href="" /> -->
   </head>
   <body>
+    <h1>📽️ Movie Tracker</h1>
+    <div class="controls">
+      <button id="addNewMovie">+Add New Movie</button>
+      <input type="text" placeholder="Search🔍" />
+      <select name="" id="">
+        <option value="">All</option>
+        <option value="">Watched</option>
+        <option value="">Unwatched</option>
+        <option value="">Favorite</option>
+      </select>
+    </div>
+    <div class="movie-list"></div>
+    <div class="popup-add-movie">
+      <div class="popup-wrapper">
+        <button class="close-btn">X</button>
+        <form id="add-movie" action="">
+          <label for="movie-title">Title:</label>
+          <input
+            type="text"
+            name="movie-title"
+            id="movie-title"
+            required
+            placeholder="Enter the movie title" />
+
+          <label for="poster">Poster:</label>
+          <input
+            type="text"
+            name="poster"
+            id="poster"
+            placeholder="Add an URL for the poster" />
+
+          <label for="movie-director">Director:</label>
+          <input
+            type="text"
+            name="movie-director"
+            id="movie-director"
+            placeholder="Enter the director's name" />
+
+          <label for="release-year">Year:</label>
+          <input
+            type="text"
+            name="release-year"
+            id="release-year"
+            placeholder="Release Year" />
+
+          <div class="wat-fav">
+            <input type="checkbox" name="watched" id="watched" />
+            <label for="watched">Watched</label>
+            <input type="checkbox" name="favorite" id="favorite" />
+            <label for="favorite">Favorite</label>
+          </div>
+          <button type="submit">Add Movie</button>
+        </form>
+      </div>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
