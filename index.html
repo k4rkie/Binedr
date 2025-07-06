@@ -8,19 +8,20 @@
     <link
       href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&display=swap"
       rel="stylesheet" />
-    <!-- <link rel="favicon" href="" /> -->
+    <link rel="icon" type="image/x-ico" href="./assets/binedr_logo.ico" />
   </head>
   <body>
     <h1>📽️ Movie Tracker</h1>
     <div class="controls">
       <button id="addNewMovie">+Add New Movie</button>
-      <input type="text" placeholder="Search🔍" />
-      <select name="" id="">
-        <option value="">All</option>
-        <option value="">Watched</option>
-        <option value="">Unwatched</option>
-        <option value="">Favorite</option>
+      <input type="text" placeholder="Search🔍" id="search-movie" />
+      <select name="select-filter" id="select-filter">
+        <option value="all">All</option>
+        <option value="watched">Watched</option>
+        <option value="unwatched">Unwatched</option>
+        <option value="favorite">Favorite</option>
       </select>
+      <button id="clear-list">Clear List</button>
     </div>
     <div class="movie-list"></div>
     <div class="popup-add-movie">
