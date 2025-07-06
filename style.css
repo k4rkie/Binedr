@@ -88,6 +88,7 @@ select {
   gap: 1rem;
 }
 .movie-card {
+  width: 200px;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -95,22 +96,27 @@ select {
   align-items: center;
   margin: 1rem;
   padding: 2rem;
-  text-align: left;
   height: 250px;
   min-width: 200px;
-  /* max-width: 200px; */
   background-color: white;
   border-radius: 10px;
   border: 1px solid black;
   box-shadow: 0px 0px 5px hsla(0, 0%, 0%, 0.5);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 .movie-card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transform: translateY(-3px);
   transition: 0.3s ease;
 }
-h2 {
-  font-size: 1.8rem;
+.movie-card h2 {
+  font-size: 1.2rem;
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 .delete-btn {
   display: none;
