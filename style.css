@@ -124,7 +124,21 @@ h2 {
   border-radius: 100%;
   border: 1px solid black;
 }
-
 .movie-card:hover .delete-btn {
+  display: block;
+}
+.edit-btn {
+  display: none;
+  position: absolute;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 0.45rem 0.7rem;
+  top: -0.5rem;
+  left: -0.7rem;
+  border-radius: 100%;
+  border: 1px solid black;
+}
+.movie-card:hover .edit-btn {
   display: block;
 }
