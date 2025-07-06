@@ -27,6 +27,8 @@
     <div class="popup-add-movie">
       <div class="popup-wrapper">
         <button class="close-btn">X</button>
+        <h3 id="title-add-movie">Add Movie</h3>
+        <h3 id="title-edit-movie">Edit Movie</h3>
         <form id="add-movie" action="">
           <label for="movie-title">Title:</label>
           <input
@@ -42,6 +44,8 @@
             name="poster"
             id="poster"
             placeholder="Add an URL for the poster" />
+
+          <img id="poster-preview" src="" style="height: 150px" />
 
           <label for="movie-director">Director:</label>
           <input
@@ -63,7 +67,7 @@
             <input type="checkbox" name="favorite" id="favorite" />
             <label for="favorite">Favorite</label>
           </div>
-          <button type="submit">Add Movie</button>
+          <button type="submit" id="form-submit-btn">Add Movie</button>
         </form>
       </div>
     </div>

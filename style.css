@@ -142,3 +142,19 @@ h2 {
 .movie-card:hover .edit-btn {
   display: block;
 }
+#title-add-movie {
+  display: none;
+}
+#title-edit-movie {
+  display: none;
+}
+#title-add-movie.show-title {
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+#title-edit-movie.show-title {
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}

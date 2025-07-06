@@ -10,15 +10,23 @@ const movieList = document.querySelector(".movie-list");
 const popup = document.querySelector(".popup-add-movie");
 const popupClose = document.querySelector(".close-btn");
 
-const movieTitle = document.getElementById("movie-title");
-const poster = document.getElementById("poster");
-const movieDirector = document.getElementById("movie-director");
-const movieYear = document.getElementById("release-year");
+let movieTitle = document.getElementById("movie-title");
+let poster = document.getElementById("poster");
+const poster_preview = document.getElementById("poster-preview");
+let movieDirector = document.getElementById("movie-director");
+let movieYear = document.getElementById("release-year");
 
 const watched = document.getElementById("watched");
 const favorite = document.getElementById("favorite");
 
 const addMovieForm = document.getElementById("add-movie");
+const form_submit_btn = document.getElementById("form-submit-btn");
+
+let isEditing = false;
+let isAdding = false;
+let editingMovieId = null;
+const title_add_movie = document.getElementById("title-add-movie");
+const title_edit_movie = document.getElementById("title-edit-movie");
 
 let watchedMovies = [];
 loadFromLocalStorage();
@@ -68,7 +76,9 @@ function renderMovie(movieArray) {
     }
 
     const status = document.createElement("p");
-    status.textContent = `${watchedStat.textContent}  |  ${favoriteStat.textContent}`;
+    status.textContent = `${watchedStat.textContent} ${
+      movie.movie_favorite ? `| ${favoriteStat.textContent}` : ""
+    }`;
 
     card.append(deleteBtn);
     card.append(editBtn);
@@ -116,34 +126,86 @@ function loadFromLocalStorage() {
   renderMovie(watchedMovies);
 }
 addNewMovie.addEventListener("click", function () {
-  popup.classList.add("active");
+  isAdding = true;
+  if (isAdding) {
+    title_add_movie.classList.add("show-title");
+    popup.classList.add("active");
+  }
 });
 
 popupClose.addEventListener("click", function () {
+  title_add_movie.classList.remove("show-title");
+  title_edit_movie.classList.remove("show-title");
+  movieTitle.value = "";
+  poster.value = "";
+  poster_preview.src = "";
+  movieDirector.value = "";
+  movieYear.value = "";
+  watched.checked = false;
+  favorite.checked = false;
   popup.classList.remove("active");
+  if (isEditing) {
+    form_submit_btn.textContent = "Add Movie";
+  }
+  isAdding = false;
+  isEditing = false;
 });
 
 addMovieForm.addEventListener("submit", function (e) {
   e.preventDefault();
+  if (isEditing) {
+    const editedMovieIndex = watchedMovies.findIndex(
+      (movie) => movie.movie_id === editingMovieId
+    );
 
-  let movie = {
-    movie_title: `${movieTitle.value}`,
-    movie_poster: `${poster.value}`,
-    movie_director: `${movieDirector.value}`,
-    movie_year: `${movieYear.value}`,
-    movie_watched: watched.checked,
-    movie_favorite: favorite.checked,
-  };
+    watchedMovies[editedMovieIndex].movie_title = movieTitle.value;
+    watchedMovies[editedMovieIndex].movie_poster = poster.value;
+    watchedMovies[editedMovieIndex].movie_director = movieDirector.value;
+    watchedMovies[editedMovieIndex].movie_year = movieYear.value;
+    if (watched.checked) {
+      watchedMovies[editedMovieIndex].movie_watched = true;
+    } else {
+      watchedMovies[editedMovieIndex].movie_watched = false;
+    }
+    if (favorite.checked) {
+      watchedMovies[editedMovieIndex].movie_favorite = true;
+    } else {
+      watchedMovies[editedMovieIndex].movie_favorite = false;
+    }
+    saveTOLocalStorage();
+    renderMovie(watchedMovies);
+    popup.classList.remove("active");
+    addMovieForm.reset();
+    editingMovieId = null;
+    form_submit_btn.textContent = "Add Movie";
+    isEditing = false;
+    title_edit_movie.classList.remove("show-title");
+    poster_preview.src = "";
+    return;
+  } else {
+    let movie = {
+      movie_title: `${movieTitle.value}`,
+      movie_poster: `${poster.value}`,
+      movie_director: `${movieDirector.value}`,
+      movie_year: `${movieYear.value}`,
+      movie_watched: watched.checked,
+      movie_favorite: favorite.checked,
+    };
 
-  let uniqueMovieId = `${movie.movie_title}_${movie.movie_year}_${Date.now()}`;
-  movie.movie_id = uniqueMovieId;
+    let uniqueMovieId = `${movie.movie_title}_${
+      movie.movie_year
+    }_${Date.now()}`;
+    movie.movie_id = uniqueMovieId;
 
-  watchedMovies.push(movie);
-  saveTOLocalStorage();
-  popup.classList.remove("active");
-  addMovieForm.reset();
-  console.log(watchedMovies);
-  renderMovie(watchedMovies);
+    watchedMovies.push(movie);
+    saveTOLocalStorage();
+    popup.classList.remove("active");
+    addMovieForm.reset();
+    renderMovie(watchedMovies);
+    title_add_movie.classList.remove("show-title");
+    poster_preview.src = "";
+    return;
+  }
 });
 
 searchMovie.addEventListener("input", function () {
@@ -172,4 +234,37 @@ movieList.addEventListener("click", function (e) {
     saveTOLocalStorage();
     renderMovie(watchedMovies);
   }
+});
+
+movieList.addEventListener("click", function (e) {
+  if (e.target.classList.contains("edit-btn")) {
+    isEditing = true;
+    if (isEditing) {
+      title_edit_movie.classList.add("show-title");
+      form_submit_btn.textContent = "Save";
+
+      popup.classList.add("active");
+
+      editingMovieId = e.target.id;
+      const movieToEdit = watchedMovies.find((movie) => {
+        return movie.movie_id === editingMovieId;
+      });
+
+      movieTitle.value = movieToEdit.movie_title;
+      poster.value = movieToEdit.movie_poster;
+      poster_preview.src = poster.value;
+      movieDirector.value = movieToEdit.movie_director;
+      movieYear.value = movieToEdit.movie_year;
+
+      if (movieToEdit.movie_watched) {
+        watched.checked = movieToEdit.movie_watched;
+      }
+      if (movieToEdit.movie_favorite) {
+        favorite.checked = movieToEdit.movie_favorite;
+      }
+    }
+  }
+});
+poster.addEventListener("input", () => {
+  poster_preview.src = poster.value;
 });
