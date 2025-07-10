@@ -5,6 +5,11 @@ const clearListBtn = document.getElementById("clear-list");
 
 selectFilter.value = "all";
 
+let total_movies_count = document.getElementById("total-movies-count");
+let watched_movies_count = document.getElementById("watched-movies-count");
+let unwatched_movies_count = document.getElementById("unwatched-movies-count");
+let favorite_movies_count = document.getElementById("favorite-movies-count");
+
 const movieList = document.querySelector(".movie-list");
 
 const popup = document.querySelector(".popup-add-movie");
@@ -89,6 +94,7 @@ function renderMovie(movieArray) {
     card.append(status);
     movieList.append(card);
   });
+  statCounter(watchedMovies);
 }
 
 function searchFilterFunc(searchQuery) {
@@ -124,6 +130,32 @@ function loadFromLocalStorage() {
     ? JSON.parse(localStorage.getItem("movies-list"))
     : [];
   renderMovie(watchedMovies);
+  statCounter(watchedMovies);
+}
+function statCounter(watchedMovies) {
+  total_movies_count.textContent = `Total Movies: ${watchedMovies.length}`;
+
+  let w_m_c = 0;
+  for (movie of watchedMovies) {
+    if (movie.movie_watched) {
+      w_m_c++;
+    }
+  }
+  watched_movies_count.textContent = `Watched: ${w_m_c}`;
+  console.log(watchedMovies.length);
+  console.log(w_m_c);
+
+  unwatched_movies_count.textContent = `Unwatched: ${
+    watchedMovies.length - w_m_c
+  }`;
+
+  let f_m_c = 0;
+  for (movie of watchedMovies) {
+    if (movie.movie_favorite) {
+      f_m_c++;
+    }
+  }
+  favorite_movies_count.textContent = `Favorite: ${f_m_c}`;
 }
 addNewMovie.addEventListener("click", function () {
   isAdding = true;
@@ -181,6 +213,7 @@ addMovieForm.addEventListener("submit", function (e) {
     isEditing = false;
     title_edit_movie.classList.remove("show-title");
     poster_preview.src = "";
+    statCounter(watchedMovies);
     return;
   } else {
     let movie = {
@@ -204,6 +237,7 @@ addMovieForm.addEventListener("submit", function (e) {
     renderMovie(watchedMovies);
     title_add_movie.classList.remove("show-title");
     poster_preview.src = "";
+    statCounter(watchedMovies);
     return;
   }
 });
@@ -224,6 +258,7 @@ clearListBtn.addEventListener("click", function () {
   movieList.innerHTML = "";
   watchedMovies.length = 0;
   saveTOLocalStorage();
+  statCounter(watchedMovies);
 });
 
 movieList.addEventListener("click", function (e) {
