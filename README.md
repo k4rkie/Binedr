@@ -5,7 +5,7 @@ It allows you to add movies with details like title, director, release year, and
 
 ---
 
-## 🚀 Features
+## Features
 
 - Add new movies through a popup form
 - Display movies as cards with poster, details, and status
@@ -14,7 +14,7 @@ It allows you to add movies with details like title, director, release year, and
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - HTML
 - CSS
@@ -22,14 +22,14 @@ It allows you to add movies with details like title, director, release year, and
 
 ---
 
-## ⚙️ Project Status
+## Project Status
 
 This is a **learning project** and is currently **in progress**.  
 More features like edit/delete, filtering, and book tracking will be added soon.
 
 ---
 
-## 📚 Why this project?
+## Why this project?
 
 Built as a hands-on way to apply:
 - DOM manipulation
@@ -39,7 +39,7 @@ Built as a hands-on way to apply:
 
 ---
 
-## 📁 How to Use
+## How to Use
 
 1. Clone the repo:
 
